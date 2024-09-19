@@ -79,5 +79,12 @@ class ContextualLogger(logging.Logger):
             self._context.pop()
             self._cached_context = None
 
+    def close(self):
+        """A way to manually close the logging context.
+
+        This is useful when using an exit stack.
+        """
+        return self.__exit__(None, None, None)
+
 
 logging.setLoggerClass(ContextualLogger)
